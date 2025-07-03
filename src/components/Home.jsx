@@ -41,7 +41,7 @@ function Home() {
 
   return (
     <div className="max-w-4xl mx-auto mt-6">
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-col gap-4 mb-4 px-4 max-w-full sm:flex-row sm:items-start items-center ">
         <input
           value={input}
           type="text"
@@ -51,7 +51,7 @@ function Home() {
         />
         <button
           onClick={Createpaste}
-          className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          className=" max-w-fit px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
         >
           {pasteId ? "Update Paste" : "Create Paste"}
         </button>
