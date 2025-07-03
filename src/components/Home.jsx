@@ -10,20 +10,13 @@ function Home() {
   const pasteId = SearchParams.get("pasteId");
   const dispatch = useDispatch();
 
-  const allPaste = useSelector((state) => {
-    return state.paste.pastes;
-  });
-  console.log(allPaste);
+  const allPaste = useSelector((state) => state.paste.pastes);
+
   useEffect(() => {
     if (pasteId) {
-      //console.log(pasteId)
-
       const paste = allPaste.find((p) => p._id === pasteId);
-      console.log(paste);
       Setinput(paste.title);
-
       setValue(paste.content);
-      console.log("Exit in effect");
     }
   }, [pasteId]);
 
@@ -36,11 +29,9 @@ function Home() {
     };
 
     if (pasteId) {
-      dispatch(updateToPastes(paste)); //updateToPastes
-      // update
+      dispatch(updateToPastes(paste));
     } else {
-      dispatch(addToPastes(paste)); //addToPastes
-      //Create
+      dispatch(addToPastes(paste));
     }
 
     Setinput("");
@@ -49,34 +40,28 @@ function Home() {
   }
 
   return (
-    <div>
-      <div className="flex flex-row gap-7 place-content-between p-1 h-13">
+    <div className="max-w-4xl mx-auto mt-6">
+      <div className="flex gap-4 mb-4">
         <input
           value={input}
           type="text"
           placeholder="Enter Title"
-          className=" mt-2 rounded-2xl w-[66%] pl-4 pt-1 pb-1 bg-black"
-          onChange={(e) => {
-            Setinput(e.target.value);
-          }}
+          className="flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200"
+          onChange={(e) => Setinput(e.target.value)}
         />
         <button
           onClick={Createpaste}
-          className=" text-xs bg-black rounded-2xl p-2 mt-2 overflow-hidden text-8 pb-2 "
+          className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
         >
           {pasteId ? "Update Paste" : "Create Paste"}
         </button>
       </div>
-      <div>
-        <textarea
-          placeholder="Enter content here..."
-          className=" rounded-2xl bg-black p-6 m-5 min-w-90 min-h-105"
-          value={Value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        ></textarea>
-      </div>
+      <textarea
+        placeholder="Enter content here..."
+        className="w-full h-60 p-4 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200 resize-none"
+        value={Value}
+        onChange={(e) => setValue(e.target.value)}
+      ></textarea>
     </div>
   );
 }

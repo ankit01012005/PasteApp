@@ -5,69 +5,42 @@ import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 
 function Pastes() {
-  const pastes = useSelector((state) => {
-    return state.paste.pastes;
-  });
-  //console.log(pastes);
-  //console.log(Pastes);
+  const pastes = useSelector((state) => state.paste.pastes);
   const dispatch = useDispatch();
-
   const [searchTerm, setsearchTerm] = useState("");
 
   const filterData = pastes.filter((paste) =>
     paste.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log(filterData);
+
   function handledelete(pasteId) {
     dispatch(removeFromPastes(pasteId));
   }
 
   return (
-    <div>
+    <div className="max-w-5xl mx-auto mt-6">
       <input
         value={searchTerm}
         type="search"
-        placeholder="Search here"
-        className="p-1 pl-3 mt-5 rounded-2xl border-amber-50  min-w-[500px] bg-black"
+        placeholder="Search here..."
+        className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-100 focus:outline-none focus:ring focus:ring-blue-200"
         onChange={(e) => setsearchTerm(e.target.value)}
       />
-      <div className="flex flex-col gap-5 rounded  mt-5">
+      <div className="mt-6 space-y-4">
         {filterData.length > 0 &&
-          filterData.map((paste) => {
-            return (
-              <div className="border rounded-l" key={paste?._id}>
-                <div>{paste.title}</div>
-                <div>{paste.content}</div>
-                <div className="flex flex-row gap-4 place-content-evenly">
-                  <button className=" p-1 rounded-xl border mt-1 mb-1">
-                    {" "}
-                    <NavLink to={`/pastes/${paste?._id}`}>View</NavLink>
-                  </button>
-                  <button className=" p-1 rounded-xl border mt-1 mb-1">
-                    <NavLink to={`/?pasteId=${paste?._id}`}>Edit</NavLink>
-                  </button>
-                  <button
-                    className=" p-1 rounded-xl border mt-1 mb-1"
-                    onClick={() => handledelete(paste?._id)}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className=" p-1 rounded-xl border mt-1 mb-1"
-                    onClick={() => {
-                      navigator.clipboard.writeText(paste?.content);
-                      toast.success("Copied");
-                    }}
-                  >
-                    Copy
-                  </button>
-                  <button className=" p-1 rounded-xl border mt-1 mb-1">
-                    Share
-                  </button>
-                </div>
+          filterData.map((paste) => (
+            <div key={paste?._id} className="p-4 rounded-xl shadow-md bg-white">
+              <h2 className="text-lg font-semibold text-blue-700">{paste.title}</h2>
+              <p className="mt-2 text-gray-700">{paste.content}</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <NavLink to={`/pastes/${paste?._id}`} className="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">View</NavLink>
+                <NavLink to={`/?pasteId=${paste?._id}`} className="px-4 py-1 bg-green-500 text-white rounded hover:bg-green-600">Edit</NavLink>
+                <button onClick={() => handledelete(paste?._id)} className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+                <button onClick={() => { navigator.clipboard.writeText(paste?.content); toast.success("Copied"); }} className="px-4 py-1 bg-purple-500 text-white rounded hover:bg-purple-600">Copy</button>
+                <button className="px-4 py-1 bg-gray-500 text-white rounded hover:bg-gray-600">Share</button>
               </div>
-            );
-          })}
+            </div>
+          ))}
       </div>
     </div>
   );

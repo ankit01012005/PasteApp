@@ -1,47 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useSearchParams } from "react-router-dom";
-import {addToPastes,updateToPastes} from '../redux/slice'
-
-
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Viewpaste() {
-
-  const {id} = useParams();
-  console.log(id)
-  const allPastes = useSelector((state)=>state.paste.pastes);
-  const paste = allPastes.filter((p)=>p._id===id)[0]
-  console.log(allPastes)
-  console.log(paste)
+  const { id } = useParams();
+  const allPastes = useSelector((state) => state.paste.pastes);
+  const paste = allPastes.find((p) => p._id === id);
 
   return (
-    <div>
-      <div className="flex flex-row gap-7 place-content-between p-1 h-13">
-        <input
-          value={paste.title}
-          type="text"
-          placeholder="Enter Title"
-          className=" mt-2 rounded-2xl w-[66%] pl-4 pt-1 pb-1 bg-black"
-          disabled
-          onChange={(e) => {
-            Setinput(e.target.value);
-          }}
-        />
-       
-      </div>
-      <div>
-        <textarea
+    <div className="max-w-4xl mx-auto mt-6">
+      <input
+        value={paste?.title}
+        type="text"
         disabled
-          placeholder="Enter content here..."
-          className=" rounded-2xl bg-black p-6 m-5 min-w-90 min-h-105"
-          value={paste.content}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        ></textarea>
-      </div>
+        className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-300"
+      />
+      <textarea
+        value={paste?.content}
+        disabled
+        className="w-full mt-4 h-60 p-4 rounded-lg bg-gray-100 border border-gray-300 resize-none"
+      ></textarea>
     </div>
-  )
+  );
 }
 
-export default Viewpaste
+export default Viewpaste;
