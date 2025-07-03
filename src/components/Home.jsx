@@ -40,13 +40,13 @@ function Home() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-6">
-      <div className="flex flex-col gap-4 mb-4 px-4 max-w-full sm:flex-row sm:items-start items-center ">
+    <div className="max-w-4xl mx-auto mt-15">
+      <div className="flex flex-col gap-6  mb-11 px-4 max-w-full sm:flex-row sm:items-start items-center ">
         <input
           value={input}
           type="text"
           placeholder="Enter Title"
-          className="flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200"
+          className="  flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200"
           onChange={(e) => Setinput(e.target.value)}
         />
         <button
@@ -58,7 +58,7 @@ function Home() {
       </div>
       <textarea
         placeholder="Enter content here..."
-        className="w-full h-60 p-4 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200 resize-none"
+        className="w-full h-90 p-4 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-200 resize-none"
         value={Value}
         onChange={(e) => setValue(e.target.value)}
       ></textarea>
