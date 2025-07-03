@@ -17,6 +17,20 @@ function Pastes() {
     dispatch(removeFromPastes(pasteId));
   }
 
+  const handleShare = (pasteId) => {
+  const shareUrl = `${window.location.origin}/paste/${pasteId}`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Check out my paste',
+      url: shareUrl
+    });
+  } else {
+    navigator.clipboard.writeText(shareUrl);
+    alert('Link copied to clipboard');
+  }
+};
+
+
   return (
     <div className="max-w-5xl mx-auto mt-6">
       <input
@@ -37,7 +51,7 @@ function Pastes() {
                 <NavLink to={`/?pasteId=${paste?._id}`} className="px-4 py-1 bg-green-500 text-white rounded hover:bg-green-600">Edit</NavLink>
                 <button onClick={() => handledelete(paste?._id)} className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
                 <button onClick={() => { navigator.clipboard.writeText(paste?.content); toast.success("Copied"); }} className="px-4 py-1 bg-purple-500 text-white rounded hover:bg-purple-600">Copy</button>
-                <button className="px-4 py-1 bg-gray-500 text-white rounded hover:bg-gray-600">Share</button>
+                <button onClick={()=>handleShare(paste?._id)} className="px-4 py-1 bg-gray-500 text-white rounded hover:bg-gray-600">Share</button>
               </div>
             </div>
           ))}
