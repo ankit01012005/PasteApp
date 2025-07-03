@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-=======
 
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
->>>>>>> 239059d17dfa3f93b5e006db2976228fe089d31d
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Viewpaste from './components/Viewpaste'
