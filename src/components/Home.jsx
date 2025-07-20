@@ -30,8 +30,13 @@ function Home() {
 
     if (pasteId) {
       dispatch(updateToPastes(paste));
-    } else {
-      dispatch(addToPastes(paste));
+    } 
+    else {
+      if((paste.title!="") && (paste.content!=""))
+        dispatch(addToPastes(paste));
+      else
+        alert("Please, Enter the data!")
+      
     }
 
     Setinput("");
